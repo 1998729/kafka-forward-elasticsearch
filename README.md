@@ -1,3 +1,5 @@
+Collect messages in real time through kafka and write them to es
+
 # kafka-forward-elasticsearch 
 Write es by consuming kafka data
 
