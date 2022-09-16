@@ -1,4 +1,4 @@
-module kafka-forward-elasticsearch
+module github.com/1998729/kafka-forward-elasticsearch
 
 go 1.16
 
