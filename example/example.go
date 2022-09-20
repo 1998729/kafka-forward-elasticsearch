@@ -69,7 +69,7 @@ func main() {
 
 	go forwarder.Start()
 
-	// 监听系统信号
+	// listen signal
 	signal.Notify(doneCh,
 		syscall.SIGTERM,
 		syscall.SIGHUP,
