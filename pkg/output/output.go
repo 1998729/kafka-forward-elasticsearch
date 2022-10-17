@@ -62,16 +62,13 @@ func (c *Output) GenerateTimeIndex() string {
 
 func (c *Output) Send() error {
 
-	// 生成开始时间戳
 	start := time.Now()
 
-	// 开始向ES插入数据(数据取决于配置文件定义的数量)
 	if handler, err := c.Bulk.Do(context.Background()); err != nil {
 		d, _ := json.Marshal(handler.Failed())
 		return errors.New(string(d))
 	}
 
-	// 生成写入时间
 	elapsed := time.Since(start)
 
 	klog.Infof("bulk elapsed: %s", elapsed)
@@ -88,13 +85,8 @@ func (c *Output) BufferLimit() int {
 
 func (c *Output) AddBuffer(data interface{}) {
 
-	// 生成索引名称
 	index := c.GenerateTimeIndex()
-
-	// 生成ES数据
 	req := elastic.NewBulkIndexRequest().Index(index).Type("kafka-forwarder-elasticsearch").Doc(data)
-
-	// 追加到缓存中
 	c.Bulk = c.Bulk.Add(req)
 }
 
